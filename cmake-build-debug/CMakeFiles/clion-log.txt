@@ -1,0 +1,4 @@
+C:\Users\cicc1\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\172.3968.17\bin\cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\cicc1\Google Drive\CLASES\Tercer Semestre\Estructura de Datos\Actividades\Tickets"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/cmake-build-debug

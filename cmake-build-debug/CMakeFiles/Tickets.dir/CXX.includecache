@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Usuario.h
+iostream
+-
+vector
+-
+
+C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/main.cpp
+iostream
+-
+vector
+-
+stdlib.h
+-
+Usuario.h
+C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Usuario.h
+

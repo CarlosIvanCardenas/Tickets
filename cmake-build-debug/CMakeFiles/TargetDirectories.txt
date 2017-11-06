@@ -1,0 +1,3 @@
+C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/cmake-build-debug/CMakeFiles/Tickets.dir
+C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/cmake-build-debug/CMakeFiles/rebuild_cache.dir
