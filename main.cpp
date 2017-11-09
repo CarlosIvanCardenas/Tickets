@@ -72,7 +72,8 @@ void uiCartelera(){
          << "*********************************************************************************\n";
 }
 
-void uiCategoria(){
+void uiCategoria(Cartelera cartelera){
+    vector<Evento> resultados;
     int seleccion;
     bool invalido;
     do{
@@ -89,24 +90,34 @@ void uiCategoria(){
         switch (seleccion){
             case 1:
                 invalido = false;
+                resultados = cartelera.buscarCategoria("Concierto");
                 break;
             case 2:
                 invalido = false;
+                resultados = cartelera.buscarCategoria("Conferencia");
                 break;
             case 3:
                 invalido = false;
+                resultados = cartelera.buscarCategoria("Espectaculo");
                 break;
             case 4:
                 invalido = false;
+                resultados = cartelera.buscarCategoria("Teatro");
                 break;
             default:
                 invalido = true;
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
+    for(auto &resultado : resultados){
+        cout << resultado.getNombre() << endl;
+    }
 }
 
-void uiFecha(){
+void uiFecha(Cartelera cartelera){
+    string hoy = "2017-11-08 00:00";
+    string semana = "2017-11-15 00:00";
+    vector<Evento> resultados;
     int seleccion;
     bool invalido;
     do{
@@ -116,31 +127,39 @@ void uiFecha(){
              << "*                               1) PROXIMOS 7 DIA                               *\n"
              << "*                               2) ESTE MES                                     *\n"
              << "*                               3) ESTE AÑO                                     *\n"
-             << "*                               4) PROXIMO AÑO                                  *\n"
+             << "*                               4) TODOS                                        *\n"
              << "*                                                                               *\n"
              << "*********************************************************************************\n";
         cin >> seleccion;
         switch (seleccion){
             case 1:
                 invalido = false;
+                resultados = cartelera.buscarFecha("2017-11-16 00:00");
                 break;
             case 2:
                 invalido = false;
+                resultados = cartelera.buscarFecha("2017-12-09 00:00");
                 break;
             case 3:
                 invalido = false;
+                resultados = cartelera.buscarFecha("2018-01-01 00:00");
                 break;
             case 4:
                 invalido = false;
+                resultados = cartelera.buscarFecha("2019-01-01 00:00");
                 break;
             default:
                 invalido = true;
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
+    for(auto &resultado : resultados){
+        cout << resultado.getNombre() << endl;
+    }
 }
 
-void uiUbicacion(){
+void uiUbicacion(Cartelera cartelera){
+    vector<Evento> resultados;
     int seleccion;
     bool invalido;
     do{
@@ -156,32 +175,58 @@ void uiUbicacion(){
         switch (seleccion){
             case 1:
                 invalido = false;
+                resultados = cartelera.buscarUbicacion("Arena Mexico");
                 break;
             case 2:
                 invalido = false;
+                resultados = cartelera.buscarUbicacion("Luis Elizondo");
                 break;
             case 3:
                 invalido = false;
+                resultados = cartelera.buscarUbicacion("Arena Monterrey");
                 break;
             default:
                 invalido = true;
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
+    for(auto &resultado : resultados){
+        cout << resultado.getNombre() << endl;
+    }
+}
+
+void uiComprar(vector<Evento> resultados){
+
 }
 
 int main() {
     int sesion = -1, seleccion, subseleccion;
     bool invalido, subinvalido;
-    string nombre, pass;
     vector<Usuario> usuarios;
-    usuarios.emplace_back(Usuario("carlos", "0123"));
-    usuarios.emplace_back(Usuario("diego", "0123"));
+    string nombre, pass;
+    ifstream db;
+    db.open("dbUsuarios.txt");
+    while(db >> nombre >> pass){
+        usuarios.emplace_back(Usuario(nombre, pass));
+    }
+    db.close();
     Cartelera cartelera;
-    cartelera.addEvento("Ed Sheran", "Concierto", "2018-01-13 20:00", "Arena Mexico", 10000);
-    cartelera.addEvento("Mario Molina", "Conferencia", "2017-11-15 10:00", "Luis Elizondo", 500);
-    cartelera.addEvento("Circo Du Solei", "Espectaculo", "2018-10-05 18:30", "Arena Monterrey", 5000);
-    cartelera.addEvento("Entremeses Cervantinos", "Teatro", "2017-12-18 10:00", "Luis Elizondo", 1000);
+    string data, categoria, fecha, ubicacion, asientos;
+    db.open("dbEventos.txt");
+    while(!db.eof()){
+        getline(db, data);
+        nombre = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        categoria = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        fecha = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        ubicacion = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        asientos = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        cartelera.addEvento(nombre, categoria, fecha, ubicacion, stoi(asientos));
+    }
     do{
         uiInicio();
         cin >> seleccion;
@@ -209,15 +254,15 @@ int main() {
         switch (seleccion){
             case 1:
                 invalido = false;
-                uiCategoria();
+                uiCategoria(cartelera);
                 break;
             case 2:
                 invalido = false;
-                uiFecha();
+                uiFecha(cartelera);
                 break;
             case 3:
                 invalido = false;
-                uiUbicacion();
+                uiUbicacion(cartelera);
                 break;
             default:
                 invalido = true;
