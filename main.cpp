@@ -22,6 +22,10 @@ int iniciarSesion(vector<Usuario> usuarios, string nombre, string pass, bool reg
 int registrar(vector<Usuario> &usuarios, string nombre, string pass){
     if(iniciarSesion(usuarios, nombre, pass, true) == -1){
         usuarios.emplace_back(Usuario(nombre, pass));
+        ofstream dbUsuarios;
+        dbUsuarios.open("dbUsuarios.txt", ios::app);
+        dbUsuarios << nombre << " " << pass << endl;
+        dbUsuarios.close();
         cout << "USUARIO CREADO CON EXITO" << endl;
         cout << "SESION INICIADA" << endl;
         return usuarios.size()-1;
@@ -72,6 +76,25 @@ void uiCartelera(){
          << "*********************************************************************************\n";
 }
 
+void uiEventos(vector<Evento> resultados){
+    int seleccion;
+    cout << "*********************************************************************************\n"
+         << "*                                                                               *\n"
+         << "* SELECCIONE EL EVENTO:                                                         *\n";
+    for (int i = 0; i < resultados.size(); ++i) {
+        cout << "* " << i << ") " << resultados[i].getNombre() << " " << resultados[i].getCategoria() << " " << resultados[i].getFecha() << "\t\t\t\t\t*\n";
+    }
+    cout << "*                                                                               *\n"
+         << "*********************************************************************************\n";
+    cin >> seleccion;
+    if(seleccion >= 0 && seleccion < resultados.size()){
+        resultados[seleccion].comprarBoletos();
+    }
+    else{
+        cout << "INGRESA UN VALOR VALIDO" << endl;
+    }
+}
+
 void uiCategoria(Cartelera cartelera){
     vector<Evento> resultados;
     int seleccion;
@@ -109,9 +132,7 @@ void uiCategoria(Cartelera cartelera){
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
-    for(auto &resultado : resultados){
-        cout << resultado.getNombre() << endl;
-    }
+    uiEventos(resultados);
 }
 
 void uiFecha(Cartelera cartelera){
@@ -153,9 +174,7 @@ void uiFecha(Cartelera cartelera){
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
-    for(auto &resultado : resultados){
-        cout << resultado.getNombre() << endl;
-    }
+    uiEventos(resultados);
 }
 
 void uiUbicacion(Cartelera cartelera){
@@ -190,18 +209,12 @@ void uiUbicacion(Cartelera cartelera){
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
-    for(auto &resultado : resultados){
-        cout << resultado.getNombre() << endl;
-    }
-}
-
-void uiComprar(vector<Evento> resultados){
-
+    uiEventos(resultados);
 }
 
 int main() {
-    int sesion = -1, seleccion, subseleccion;
-    bool invalido, subinvalido;
+    int sesion = -1, seleccion;
+    bool invalido;
     vector<Usuario> usuarios;
     string nombre, pass;
     ifstream db;
@@ -211,7 +224,7 @@ int main() {
     }
     db.close();
     Cartelera cartelera;
-    string data, categoria, fecha, ubicacion, asientos;
+    string data, categoria, fecha, ubicacion, asientos, mapa;
     db.open("dbEventos.txt");
     while(!db.eof()){
         getline(db, data);
@@ -225,7 +238,9 @@ int main() {
         data.erase(0, data.find(',')+1);
         asientos = data.substr(0, data.find(','));
         data.erase(0, data.find(',')+1);
-        cartelera.addEvento(nombre, categoria, fecha, ubicacion, stoi(asientos));
+        mapa = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        cartelera.addEvento(nombre, categoria, fecha, ubicacion, stoi(asientos), mapa);
     }
     do{
         uiInicio();

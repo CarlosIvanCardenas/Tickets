@@ -1,7 +1,3 @@
-//
-// Created by cicc98 on 11/2/2017.
-//
-
 #ifndef TICKETS_USUARIO_H
 #define TICKETS_USUARIO_H
 
@@ -10,16 +6,18 @@
 #include <vector>
 using namespace std;
 
+#include "Boleto.h"
+
 class Usuario{
 public:
     Usuario(string nombre, string pass);
     string getNombre();
     string getPass();
-    void addBoleto(int id);
+    //void addBoleto(Boleto boleto);
 private:
     string nombre;
     string pass;
-    vector<int> comprados;
+    //vector<Boleto> comprados;
 };
 
 Usuario::Usuario(string nombre, string pass){
@@ -35,8 +33,5 @@ string Usuario::getPass() {
     return pass;
 }
 
-void Usuario::addBoleto(int id) {
-    comprados.push_back(id);
-};
 
 #endif //TICKETS_USUARIO_H

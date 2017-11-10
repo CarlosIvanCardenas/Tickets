@@ -1,4 +1,4 @@
-Ed Sheran,Concierto,2018-01-13 20:00,Arena Mexico,10000,
-Mario Molina,Conferencia,2017-11-15 10:00,Luis Elizondo,500,
-Circo Du Solei,Espectaculo,2018-10-05 18:30,Arena Monterrey,5000,
-Entremeses Cervantinos,Teatro,2017-12-18 10:00,Luis Elizondo,1000,
+Ed Sheran,Concierto,2018-01-13 20:00,Arena Mexico,25,oooooxxoooooxxoxoxooxoooo,
+Mario Molina,Conferencia,2017-11-15 10:00,Luis Elizondo,16,ooxxoooooxxoxoxo,
+Circo Du Solei,Espectaculo,2018-10-05 18:30,Arena Monterrey,16,ooxxoooooxxoxoxo,
+Entremeses Cervantinos,Teatro,2017-12-18 10:00,Luis Elizondo,25,oooooxxoooooxxoxoxooxoooo,

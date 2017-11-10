@@ -1,7 +1,3 @@
-//
-// Created by cicc98 on 11/2/2017.
-//
-
 #ifndef TICKETS_CARTELERA_H
 #define TICKETS_CARTELERA_H
 
@@ -9,7 +5,6 @@
 #include <iostream>
 using namespace std;
 
-#include "Usuario.h"
 #include "Evento.h"
 
 class Cartelera{
@@ -17,13 +12,13 @@ public:
     vector<Evento> buscarCategoria(string search);
     vector<Evento> buscarFecha(string search);
     vector<Evento> buscarUbicacion(string search);
-    void addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos);
+    void addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa);
 private:
     vector<Evento> eventos;
 };
 
-void Cartelera::addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos) {
-    eventos.emplace_back(Evento(nombre, categoria, fecha, ubicacion, asientos));
+void Cartelera::addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa) {
+    eventos.emplace_back(Evento(nombre, categoria, fecha, ubicacion, asientos, mapa));
 }
 
 vector<Evento> Cartelera::buscarCategoria(string search) {
