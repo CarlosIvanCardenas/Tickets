@@ -91,10 +91,10 @@ void Evento::uiMapa(){
 
 bool Evento::validar(string seleccion){
     int grid = sqrt(asientos);
-    int row = seleccion[0] - 64;
-    int col = seleccion[1] - 48;
-    int index = (row * col) - 1;
-    if(row <= grid && col <= grid && mapa[index] != 'x'){
+    int row = seleccion[0] - 65;
+    int col = seleccion[1] - 49;
+    int index = (row * grid + col);
+    if(row <= grid && row >= 0 && col <= grid && col >= 0 && mapa[index] != 'x'){
         cout << "ASIENTO DISPONIBLE\n";
         mapa[index] = 'x';
         return false;

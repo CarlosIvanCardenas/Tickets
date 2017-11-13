@@ -14,7 +14,7 @@ int iniciarSesion(vector<Usuario> usuarios, string nombre, string pass, bool reg
         }
     }
     if(!registro)
-        cout << "NOMBRE O CONTRASEÑA INCORRECTA" << endl;
+        cout << "NOMBRE O CONTRASENIA INCORRECTA" << endl;
     return -1;
 }
 
