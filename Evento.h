@@ -8,7 +8,6 @@ using namespace std;
 
 class Evento{
 public:
-    Evento();
     Evento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa, double precio);
     string getNombre();
     string getCategoria();
@@ -16,7 +15,9 @@ public:
     string getUbicacion();
     int getAsientos();
     string getMapa();
+    double getPrecio();
     void comprarBoletos();
+    void setMapa(string mapa);
 private:
     string nombre;
     string categoria;
@@ -67,6 +68,10 @@ int Evento::getAsientos() {
 
 string Evento::getMapa() {
     return mapa;
+}
+
+double Evento::getPrecio() {
+    return precio;
 }
 
 void Evento::uiMapa(){
@@ -138,8 +143,8 @@ void Evento::comprarBoletos() {
     }
 }
 
-Evento::Evento() {
-
+void Evento::setMapa(string mapa) {
+    this->mapa = mapa;
 }
 
 #endif //TICKETS_EVENTO_H

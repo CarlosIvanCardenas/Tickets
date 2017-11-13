@@ -1,4 +1,4 @@
-Ed Sheran,Concierto,2018-01-13 20:00,Arena Mexico,25,oooooxxoooooxxoxoxooxoooo,1500.50,
-Mario Molina,Conferencia,2017-11-15 10:00,Luis Elizondo,16,ooxxoooooxxoxoxo,150.00,
-Circo Du Solei,Espectaculo,2018-10-05 18:30,Arena Monterrey,16,ooxxoooooxxoxoxo,299.99,
-Entremeses Cervantinos,Teatro,2017-12-18 10:00,Luis Elizondo,25,oooooxxoooooxxoxoxooxoooo,50.50,
+Ed Sheran,Concierto,2018-01-13 20:00,Arena Mexico,25,oooooxxoooooxxoxoxooxoooo,1000.5,
+Mario Molina,Conferencia,2017-11-15 10:00,Luis Elizondo,16,xoxxoooooxxoxoxo,99.9,
+Circo Du Solei,Espectaculo,2018-10-05 18:30,Arena Monterrey,16,ooxxoooooxxoxoxo,150,
+Entremeses Cervantinos,Teatro,2017-12-18 10:00,Luis Elizondo,25,oooooxxoooooxxoxoxooxoooo,50.5,

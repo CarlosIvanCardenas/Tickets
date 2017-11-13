@@ -14,6 +14,7 @@ public:
     vector<Evento> buscarUbicacion(string search);
     vector<Evento> getEventos();
     void addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa, double precio);
+    void comparar(Evento cambio);
 private:
     vector<Evento> eventos;
 };
@@ -52,6 +53,14 @@ vector<Evento> Cartelera::buscarUbicacion(string search) {
 
 vector<Evento> Cartelera::getEventos() {
     return eventos;
+}
+
+void Cartelera::comparar(Evento cambio) {
+    for (int i = 0; i < eventos.size(); ++i) {
+        if(eventos[i].getNombre() == cambio.getNombre()){
+            eventos[i].setMapa(cambio.getMapa());
+        }
+    }
 }
 
 

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <stdlib.h>
 using namespace std;
 
 #include "Usuario.h"
@@ -76,7 +75,7 @@ void uiCartelera(){
          << "*********************************************************************************\n";
 }
 
-void uiEventos(vector<Evento> resultados){
+void uiEventos(vector<Evento> resultados, Cartelera &cartelera){
     int seleccion;
     cout << "*********************************************************************************\n"
          << "*                                                                               *\n"
@@ -93,6 +92,7 @@ void uiEventos(vector<Evento> resultados){
     else{
         cout << "INGRESA UN VALOR VALIDO" << endl;
     }
+    cartelera.comparar(resultados[seleccion]);
 }
 
 void uiCategoria(Cartelera &cartelera){
@@ -132,7 +132,8 @@ void uiCategoria(Cartelera &cartelera){
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
-    uiEventos(resultados);
+    uiEventos(resultados, cartelera);
+
 }
 
 void uiFecha(Cartelera &cartelera){
@@ -147,7 +148,7 @@ void uiFecha(Cartelera &cartelera){
              << "*                       PROXIMOS EVENTOS POR RANGO DE FECHAS:                   *\n"
              << "*                               1) PROXIMOS 7 DIA                               *\n"
              << "*                               2) ESTE MES                                     *\n"
-             << "*                               3) ESTE AÑO                                     *\n"
+             << "*                               3) ESTE ANIO                                    *\n"
              << "*                               4) TODOS                                        *\n"
              << "*                                                                               *\n"
              << "*********************************************************************************\n";
@@ -174,7 +175,7 @@ void uiFecha(Cartelera &cartelera){
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
-    uiEventos(resultados);
+    uiEventos(resultados, cartelera);
 }
 
 void uiUbicacion(Cartelera &cartelera){
@@ -209,7 +210,7 @@ void uiUbicacion(Cartelera &cartelera){
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     }while (invalido);
-    uiEventos(resultados);
+    uiEventos(resultados, cartelera);
 }
 
 int main() {
@@ -291,9 +292,9 @@ int main() {
         cin >> data;
     }while(data == "si");
     ofstream dbEventos;
-    dbEventos.open("dbEventos");
+    dbEventos.open("dbEventos.txt");
     for(auto evento : cartelera.getEventos()){
-        dbEventos << evento.getNombre() << "," << evento.getCategoria() << "," << evento.getFecha() << "," << evento.getUbicacion() << "," << evento.getAsientos() << "," << evento.getMapa() << ",\n";
+        dbEventos << evento.getNombre() << "," << evento.getCategoria() << "," << evento.getFecha() << "," << evento.getUbicacion() << "," << evento.getAsientos() << "," << evento.getMapa() << "," << evento.getPrecio() << (evento.getPrecio() != 50.5 ? ",\n" : ",");
     }
     dbEventos.close();
     return 0;

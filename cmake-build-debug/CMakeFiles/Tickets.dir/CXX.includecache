@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Boleto.h
-Evento.h
-C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Evento.h
-
 C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Cartelera.h
 vector
 -
@@ -31,15 +27,11 @@ fstream
 -
 vector
 -
-Boleto.h
-C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Boleto.h
 
 C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/main.cpp
 iostream
 -
 vector
--
-stdlib.h
 -
 Usuario.h
 C:/Users/cicc1/Google Drive/CLASES/Tercer Semestre/Estructura de Datos/Actividades/Tickets/Usuario.h
