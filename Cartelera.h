@@ -12,13 +12,14 @@ public:
     vector<Evento> buscarCategoria(string search);
     vector<Evento> buscarFecha(string search);
     vector<Evento> buscarUbicacion(string search);
-    void addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa);
+    vector<Evento> getEventos();
+    void addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa, double precio);
 private:
     vector<Evento> eventos;
 };
 
-void Cartelera::addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa) {
-    eventos.emplace_back(Evento(nombre, categoria, fecha, ubicacion, asientos, mapa));
+void Cartelera::addEvento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa, double precio) {
+    eventos.emplace_back(Evento(nombre, categoria, fecha, ubicacion, asientos, mapa, precio));
 }
 
 vector<Evento> Cartelera::buscarCategoria(string search) {
@@ -47,6 +48,10 @@ vector<Evento> Cartelera::buscarUbicacion(string search) {
             result.push_back(evento);
     }
     return result;
+}
+
+vector<Evento> Cartelera::getEventos() {
+    return eventos;
 }
 
 

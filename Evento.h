@@ -9,11 +9,13 @@ using namespace std;
 class Evento{
 public:
     Evento();
-    Evento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa);
+    Evento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa, double precio);
     string getNombre();
     string getCategoria();
     string getFecha();
     string getUbicacion();
+    int getAsientos();
+    string getMapa();
     void comprarBoletos();
 private:
     string nombre;
@@ -23,11 +25,12 @@ private:
     int asientos;
     string mapa;
     int disponibles;
+    double precio;
     void uiMapa();
     bool validar(string seleccion);
 };
 
-Evento::Evento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa) {
+Evento::Evento(string nombre, string categoria, string fecha, string ubicacion, int asientos, string mapa, double precio) {
     this->nombre = nombre;
     this->categoria = categoria;
     this->fecha = fecha;
@@ -39,6 +42,7 @@ Evento::Evento(string nombre, string categoria, string fecha, string ubicacion, 
         if(i == 'x')
             disponibles--;
     }
+    this->precio = precio;
 }
 
 string Evento::getNombre() {
@@ -55,6 +59,14 @@ string Evento::getFecha() {
 
 string Evento::getUbicacion() {
     return ubicacion;
+}
+
+int Evento::getAsientos() {
+    return asientos;
+}
+
+string Evento::getMapa() {
+    return mapa;
 }
 
 void Evento::uiMapa(){
@@ -92,7 +104,7 @@ void Evento::comprarBoletos() {
     if(disponibles != 0){
         int num = 0;
         do{
-            cout << "CUANTOS BOLETOS DESEA COMPRAR?\n";
+            cout << "CUANTOS BOLETOS DESEA COMPRAR? (PRECIO POR BOLETO: $" << precio << ")\n";
             cin >> num;
             if(num > disponibles)
                 cout << "ESA CANTIDAD DE BOLETOS NO ESTA DISPONIBLE\nEXISTEN " << disponibles << " BOLETOS DISPONIBLES\n";
@@ -107,14 +119,27 @@ void Evento::comprarBoletos() {
             }while(validar(seleccion));
 
         }
-        cout << "GRACIAS POR SU COMPRA :)\n";
+        cout << "*********************************************************************************\n"
+             << "*                                                                               *\n"
+             << "*                            GRACIAS POR SU COMPRA :)                           *\n"
+             << "*                                                                               *\n"
+             << "*                       DESEA CONTINUAR COMPRANDO: (si/no)                      *\n"
+             << "*                                                                               *\n"
+             << "*********************************************************************************\n";
     }
     else{
-        cout << "SE AGOTARON LOS BOLETOS PARA ESTE EVENTO" << endl;
+        cout << "*********************************************************************************\n"
+             << "*                                                                               *\n"
+             << "*                  SE AGOTARON LOS BOLETOS PARA ESTE EVENTO :(                  *\n"
+             << "*                                                                               *\n"
+             << "*                      DESEA CONTINUAR COMPRANDO: (si/no)                       *\n"
+             << "*                                                                               *\n"
+             << "*********************************************************************************\n";
     }
 }
 
 Evento::Evento() {
 
 }
+
 #endif //TICKETS_EVENTO_H

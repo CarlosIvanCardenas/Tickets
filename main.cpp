@@ -95,7 +95,7 @@ void uiEventos(vector<Evento> resultados){
     }
 }
 
-void uiCategoria(Cartelera cartelera){
+void uiCategoria(Cartelera &cartelera){
     vector<Evento> resultados;
     int seleccion;
     bool invalido;
@@ -135,7 +135,7 @@ void uiCategoria(Cartelera cartelera){
     uiEventos(resultados);
 }
 
-void uiFecha(Cartelera cartelera){
+void uiFecha(Cartelera &cartelera){
     string hoy = "2017-11-08 00:00";
     string semana = "2017-11-15 00:00";
     vector<Evento> resultados;
@@ -177,7 +177,7 @@ void uiFecha(Cartelera cartelera){
     uiEventos(resultados);
 }
 
-void uiUbicacion(Cartelera cartelera){
+void uiUbicacion(Cartelera &cartelera){
     vector<Evento> resultados;
     int seleccion;
     bool invalido;
@@ -224,7 +224,7 @@ int main() {
     }
     db.close();
     Cartelera cartelera;
-    string data, categoria, fecha, ubicacion, asientos, mapa;
+    string data, categoria, fecha, ubicacion, asientos, mapa, precio;
     db.open("dbEventos.txt");
     while(!db.eof()){
         getline(db, data);
@@ -240,8 +240,11 @@ int main() {
         data.erase(0, data.find(',')+1);
         mapa = data.substr(0, data.find(','));
         data.erase(0, data.find(',')+1);
-        cartelera.addEvento(nombre, categoria, fecha, ubicacion, stoi(asientos), mapa);
+        precio = data.substr(0, data.find(','));
+        data.erase(0, data.find(',')+1);
+        cartelera.addEvento(nombre, categoria, fecha, ubicacion, stoi(asientos), mapa, stod(precio));
     }
+    db.close();
     do{
         uiInicio();
         cin >> seleccion;
@@ -264,26 +267,34 @@ int main() {
         }
     } while(invalido || sesion == -1);
     do{
-        uiCartelera();
-        cin >> seleccion;
-        switch (seleccion){
-            case 1:
-                invalido = false;
-                uiCategoria(cartelera);
-                break;
-            case 2:
-                invalido = false;
-                uiFecha(cartelera);
-                break;
-            case 3:
-                invalido = false;
-                uiUbicacion(cartelera);
-                break;
-            default:
-                invalido = true;
-                cout << "INGRESA UN VALOR VALIDO" << endl;
-        }
-    } while(invalido);
-
+        do{
+            uiCartelera();
+            cin >> seleccion;
+            switch (seleccion){
+                case 1:
+                    invalido = false;
+                    uiCategoria(cartelera);
+                    break;
+                case 2:
+                    invalido = false;
+                    uiFecha(cartelera);
+                    break;
+                case 3:
+                    invalido = false;
+                    uiUbicacion(cartelera);
+                    break;
+                default:
+                    invalido = true;
+                    cout << "INGRESA UN VALOR VALIDO" << endl;
+            }
+        } while(invalido);
+        cin >> data;
+    }while(data == "si");
+    ofstream dbEventos;
+    dbEventos.open("dbEventos");
+    for(auto evento : cartelera.getEventos()){
+        dbEventos << evento.getNombre() << "," << evento.getCategoria() << "," << evento.getFecha() << "," << evento.getUbicacion() << "," << evento.getAsientos() << "," << evento.getMapa() << ",\n";
+    }
+    dbEventos.close();
     return 0;
 }
