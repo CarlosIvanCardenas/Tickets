@@ -55,6 +55,7 @@ vector<Evento> Cartelera::getEventos() {
     return eventos;
 }
 
+//Busca un evento en la cartelara para actualizar el mapa de asientos
 void Cartelera::comparar(Evento cambio) {
     for (int i = 0; i < eventos.size(); ++i) {
         if(eventos[i].getNombre() == cambio.getNombre()){

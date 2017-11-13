@@ -74,6 +74,7 @@ double Evento::getPrecio() {
     return precio;
 }
 
+//Dibide el mapa de asientos en una matriz para formar una interfaz
 void Evento::uiMapa(){
     int grid = sqrt(asientos);
     cout << "*********************************************************************************\n";
@@ -89,6 +90,7 @@ void Evento::uiMapa(){
     cout << "*********************************************************************************\n";
 }
 
+//Valida que el asiento seleccionado este disponible y que este exista
 bool Evento::validar(string seleccion){
     int grid = sqrt(asientos);
     int row = seleccion[0] - 65;

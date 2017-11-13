@@ -5,6 +5,7 @@ using namespace std;
 #include "Usuario.h"
 #include "Cartelera.h"
 
+//Funcion para iniciar sesion, regresa el id del usuario actual
 int iniciarSesion(vector<Usuario> usuarios, string nombre, string pass, bool registro = false){
     for (int i = 0; i < usuarios.size(); ++i) {
         if(usuarios[i].getNombre() == nombre && usuarios[i].getPass() == pass){
@@ -18,6 +19,7 @@ int iniciarSesion(vector<Usuario> usuarios, string nombre, string pass, bool reg
     return -1;
 }
 
+//Funcion para registrar un usuario a excepcion de que este ya exista, regresa el id del usuario actual
 int registrar(vector<Usuario> &usuarios, string nombre, string pass){
     if(iniciarSesion(usuarios, nombre, pass, true) == -1){
         usuarios.emplace_back(Usuario(nombre, pass));
@@ -34,6 +36,7 @@ int registrar(vector<Usuario> &usuarios, string nombre, string pass){
     return -1;
 }
 
+//Conjunto de interfaces de usuario
 void uiInicio(){
     cout << "*********************************************************************************\n"
          << "*                                                                               *\n"
@@ -75,6 +78,7 @@ void uiCartelera(){
          << "*********************************************************************************\n";
 }
 
+//Despliega los eventos disponibles segun el filtro, permite comprar un boleto
 void uiEventos(vector<Evento> resultados, Cartelera &cartelera){
     int seleccion;
     cout << "*********************************************************************************\n"
@@ -216,6 +220,7 @@ void uiUbicacion(Cartelera &cartelera){
 int main() {
     int sesion = -1, seleccion;
     bool invalido;
+    //Recupera la informacion guardada en la base de datos de usuarios
     vector<Usuario> usuarios;
     string nombre, pass;
     ifstream db;
@@ -224,6 +229,7 @@ int main() {
         usuarios.emplace_back(Usuario(nombre, pass));
     }
     db.close();
+    //Recupera la informacion guardada en la base de datos de eventos
     Cartelera cartelera;
     string data, categoria, fecha, ubicacion, asientos, mapa, precio;
     db.open("dbEventos.txt");
@@ -246,6 +252,7 @@ int main() {
         cartelera.addEvento(nombre, categoria, fecha, ubicacion, stoi(asientos), mapa, stod(precio));
     }
     db.close();
+    //Primera pantalla, iniciar sesion o registrarse
     do{
         uiInicio();
         cin >> seleccion;
@@ -267,6 +274,7 @@ int main() {
                 cout << "INGRESA UN VALOR VALIDO" << endl;
         }
     } while(invalido || sesion == -1);
+    //Muestra las diferentes formas de filtrar eventos
     do{
         do{
             uiCartelera();
@@ -291,6 +299,7 @@ int main() {
         } while(invalido);
         cin >> data;
     }while(data == "si");
+    //Guarda los cambios en los eventos en la base de datos
     ofstream dbEventos;
     dbEventos.open("dbEventos.txt");
     for(auto evento : cartelera.getEventos()){
